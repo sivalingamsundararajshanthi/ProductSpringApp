@@ -3,6 +3,7 @@ package com.hackerrank.eshopping.product.dashboard.controller;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -61,6 +62,61 @@ public class ProductService {
 			
 			//Return HTTPResponse code of 201
 			return new ResponseEntity(HttpStatus.CREATED);
+		}
+	}
+	
+	/**
+	 * This method is used to update a product in the database.
+	 * 
+	 * This method will check to see if the product exists in the database with the given id-
+	 * (i)If the product exists in the database-
+	 * 		(a)It will check if retail_price, discounted_price and availability have the same value, if so it won't update and
+	 *         return Http response code of 400 else it will update and give Http response code of 200.
+	 * (ii)If the product does not exist it will return a Http response code of 400.
+	 */
+	public ResponseEntity<?> updateProduct(Product product) {
+		if(productRepository.existsById(product.getId())) {
+			
+			//The product exists get Optional
+			Optional<Product> p = productRepository.findById(product.getId());
+			if(p.isPresent()) {
+				//Get product object from the optional
+				Product pr = p.get();
+				
+				if((pr.getRetailPrice() == product.getRetailPrice()) && (pr.getDiscountedPrice() == product.getDiscountedPrice())
+						&& (pr.getAvailability() == product.getAvailability())) {
+					//If all the three values in the JSON match the fields of the object don't update 
+					return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+				} else {
+					//None of the values match update the value
+					productRepository.save(product);
+					//Return OK HttStatus Response
+					return new ResponseEntity<>(HttpStatus.OK);
+				}
+			} else {
+				//Optional is empty send BAD_REQUEST HttpRequest Response
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+		} else {
+			//Optional is empty send BAD_REQUEST HttpRequest Response
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	/*
+	 * This method is used to get product from the database based on the ID.
+	 * 
+	 * (i)If the a product is found which has the id that is passed in, return the ResponseEntity with the product and 200
+	 *    HttpResponse code.
+	 * (ii)Else return ResponseEntity with 404 HttpResponse code.
+	 */
+	public ResponseEntity<Product> getProductById(Long id){
+		if(productRepository.existsById(id)) {
+			//Product is found
+			return new ResponseEntity<>(productRepository.findById(id).get(), HttpStatus.OK);
+		} else {
+			//Product is not found
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 }
