@@ -39,7 +39,15 @@ public class ProductsController {
 	 */
 	@RequestMapping(method=RequestMethod.PUT, value="/{product_id}")
 	public void updateProduct(@RequestBody Product product, @PathVariable Long product_id) {
-		
+		productService.updateProduct(product);
+	}
+	
+	/*
+	 * This method is used to return a Product if it exists along with a ResponseEntity
+	 */
+	@RequestMapping("/{product_id}")
+	public ResponseEntity<Product> getProductById(@PathVariable Long product_id){
+		return productService.getProductById(product_id);
 	}
 }
 

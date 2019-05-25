@@ -10,6 +10,5 @@ import com.hackerrank.eshopping.product.dashboard.model.Product;
  * Long
  */
 public interface ProductRepository extends CrudRepository<Product, Long> {
-
 	
 }
