@@ -1,6 +1,16 @@
 package com.hackerrank.eshopping.product.dashboard.model;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+
+/*
+ * Making the Product class as an Entity such that the Product object can be mapped to Database.
+ */
+@Entity
 public class Product {
+	
+	@Id
     private Long id;
     private String name;
     private String category;
