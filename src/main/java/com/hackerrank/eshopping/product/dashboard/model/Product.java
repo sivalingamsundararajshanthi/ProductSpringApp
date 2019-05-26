@@ -1,5 +1,7 @@
 package com.hackerrank.eshopping.product.dashboard.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -8,7 +10,7 @@ import javax.persistence.Id;
  * Making the Product class as an Entity such that the Product object can be mapped to Database.
  */
 @Entity
-public class Product {
+public class Product implements Serializables {
 	
 	@Id
     private Long id;
