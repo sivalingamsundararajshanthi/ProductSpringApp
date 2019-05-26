@@ -14,4 +14,5 @@ import com.hackerrank.eshopping.product.dashboard.model.Product;
 public interface ProductRepository extends CrudRepository<Product, Long> {
 	
 	public List<Product> findByCategory(String category);
+	public List<Product> findByCategoryAndAvailability(String category, Boolean availability);
 }

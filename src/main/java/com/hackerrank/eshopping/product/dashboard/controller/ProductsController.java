@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hackerrank.eshopping.product.dashboard.model.Product;
@@ -22,7 +24,7 @@ public class ProductsController {
 	/*
 	 * This service method is used to get all the products in the database and return it with the response code
 	 */
-	public ResponseEntity<List<Product>> getAllProducts(){
+	public ResponseEntity<List<Product>> findAllProducts(){
 		return productService.getAllProducts();
 	}
 	
@@ -45,17 +47,28 @@ public class ProductsController {
 	/*
 	 * This method is used to return a Product if it exists along with a ResponseEntity
 	 */
-	@RequestMapping("/{product_id}")
-	public ResponseEntity<Product> getProductById(@PathVariable Long product_id){
+	@RequestMapping(method=RequestMethod.GET, value="/{product_id}")
+	public ResponseEntity<Product> findProductById(@PathVariable Long product_id){
 		return productService.getProductById(product_id);
 	}
 	
 	/*
 	 * This method is used to get the products that match a particular category
 	 */
-	@RequestMapping("?category={category}")
-	public ResponseEntity<List<Product>> getProductByCategory(@PathVariable String category){
+	@RequestMapping(method=RequestMethod.GET, params= "category")
+	@ResponseBody
+	public ResponseEntity<List<Product>> findProductsByCategory( @RequestParam("category") String category){
 		return productService.getProductByAvailability(category);
+	}
+	
+	/*
+	 * This method is used to get products based on category and availability
+	 */
+	@RequestMapping(method=RequestMethod.GET, params= {"category", "availability"})
+	@ResponseBody
+	public ResponseEntity<List<Product>> findProductsByCategoryAndAvailability(@RequestParam("category") String category,
+			@RequestParam("availability") Integer availability){
+		return productService.getProductByCategoryAndAvailability(availability, category);
 	}
 }
 
