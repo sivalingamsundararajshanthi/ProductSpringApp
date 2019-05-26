@@ -190,7 +190,7 @@ public class ProductService {
 		
 //		products.sort(Comparator.comparing().thenComparing());
 		
-		return new ResponseEntity<>(productRepository.findByCategoryAndAvailability(category, con), HttpStatus.OK);
+		return new ResponseEntity<>(products, HttpStatus.OK);
 	}
 }
 
