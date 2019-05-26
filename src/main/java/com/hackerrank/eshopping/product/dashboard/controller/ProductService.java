@@ -183,10 +183,10 @@ public class ProductService {
 //		products.sort(Comparator.comparing(Product::getDiscountedPercentage).reversed().thenComparing(Product::getDiscountedPrice)
 //				.thenComparing(Product::getId));
 		
-		products.sort(new ProductDiscountPercentageComparator().thenComparing(Product::getDiscountedPrice)
-				.thenComparing(Product::getId));
+//		products.sort(new ProductDiscountPercentageComparator().thenComparing(Product::getDiscountedPrice)
+//				.thenComparing(Product::getId));
 		
-//		products.sort(new ProductDiscountPercentageComparator());
+		products.sort(new ProductDiscountPercentageComparator());
 		
 //		products.sort(Comparator.comparing().thenComparing());
 		
