@@ -1,6 +1,7 @@
 package com.hackerrank.eshopping.product.dashboard.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,6 @@ public class ProductsController {
 	 * This service method is used to add a product to the database
 	 */
 	@RequestMapping(method=RequestMethod.POST)
-	@ResponseBody
 	public ResponseEntity<?> addProduct(@RequestBody Product product) {
 		return productService.addProduct(product);
 	}
@@ -43,9 +43,8 @@ public class ProductsController {
 	 * This service method is used to update a value in the database
 	 */
 	@RequestMapping(method=RequestMethod.PUT, value="/{product_id}")
-	@ResponseBody
-	public void updateProduct(@RequestBody Product product, @PathVariable Long product_id) {
-		productService.updateProduct(product);
+	public void updateProduct(@RequestBody Map<String, Object> payLoad, @PathVariable("product_id") Long product_id) {
+		productService.updateProduct(product_id, payLoad);
 	}
 	
 	/*

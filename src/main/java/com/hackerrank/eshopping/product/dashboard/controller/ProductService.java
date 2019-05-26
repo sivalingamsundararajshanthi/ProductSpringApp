@@ -3,6 +3,7 @@ package com.hackerrank.eshopping.product.dashboard.controller;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,22 +89,26 @@ public class ProductService {
 	 *         return Http response code of 400 else it will update and give Http response code of 200.
 	 * (ii)If the product does not exist it will return a Http response code of 400.
 	 */
-	public ResponseEntity<?> updateProduct(Product product) {
-		if(productRepository.existsById(product.getId())) {
-			
+	public ResponseEntity<?> updateProduct(Long product_id, Map<String, Object> payLoad) {
+		if(productRepository.existsById(product_id)) {
+
 			//The product exists get Optional
-			Optional<Product> p = productRepository.findById(product.getId());
+			Optional<Product> p = productRepository.findById(product_id);
 			if(p.isPresent()) {
 				//Get product object from the optional
 				Product pr = p.get();
 				
-				if((pr.getRetailPrice() == product.getRetailPrice()) && (pr.getDiscountedPrice() == product.getDiscountedPrice())
-						&& (pr.getAvailability() == product.getAvailability())) {
+				if((pr.getRetailPrice() == payLoad.get("retail_price")) 
+						&& (pr.getDiscountedPrice() == payLoad.get("discounted_price"))
+						&& (pr.getAvailability() == payLoad.get("availability"))) {
 					//If all the three values in the JSON match the fields of the object don't update 
 					return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 				} else {
 					//None of the values match update the value
-					productRepository.save(product);
+					pr.setAvailability((Boolean)payLoad.get("availability"));
+					pr.setDiscountedPrice((Double)payLoad.get("discounted_price"));
+					pr.setRetailPrice((Double)payLoad.get("retail_price"));
+					productRepository.save(pr);
 					//Return OK HttStatus Response
 					return new ResponseEntity<>(HttpStatus.OK);
 				}
