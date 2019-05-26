@@ -8,11 +8,25 @@ public class ProductDiscountPercentageComparator implements Comparator<Product> 
 	
 	@Override
 	public int compare(Product p1, Product p2) {
-		return getDiscountedPercentage(p2) - getDiscountedPercentage(p1);
+		int discountPercentage = getDiscountedPercentage(p2) - getDiscountedPercentage(p1);
+		
+		if(discountPercentage != 0) {
+			return discountPercentage;
+		} else {
+			int discountPriceComparison = p2.getDiscountedPrice().compareTo(p1.getDiscountedPrice());
+			
+			if(discountPriceComparison != 0) {
+				return discountPriceComparison;
+			} else {
+				return Math.toIntExact(p2.getId()) - Math.toIntExact(p1.getId());
+			}
+		}
 	}
 	
 	private int getDiscountedPercentage(Product p) {
-		return (int)(((p.getRetailPrice()-p.getDiscountedPrice())/p.getRetailPrice()) * 100);
+		Double num = p.getRetailPrice() - p.getDiscountedPrice();
+		Double den = p.getRetailPrice();
+		return (int)((num/den) * 100);
 	}
 
 }
