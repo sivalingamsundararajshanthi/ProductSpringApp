@@ -90,13 +90,13 @@ public class ProductService {
 	 * (ii)If the product does not exist it will return a Http response code of 400.
 	 */
 	public ResponseEntity<?> updateProduct(Long product_id, Map<String, Object> payLoad) {
+		/*
 		if(productRepository.findById(product_id) != null) {
 			return new ResponseEntity<>("No Such Product", HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<>("No Such Product", HttpStatus.BAD_REQUEST);
-		}
+		}*/
 		
-		/*
 		if(productRepository.existsById(product_id)) {
 			
 			//The product exists get Optional
@@ -126,7 +126,7 @@ public class ProductService {
 		} else {
 			//Optional is empty send BAD_REQUEST HttpRequest Response
 			return new ResponseEntity<>("No Such Product", HttpStatus.BAD_REQUEST);
-		}*/
+		}
 	}
 	
 	/*

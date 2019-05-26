@@ -43,8 +43,8 @@ public class ProductsController {
 	 * This service method is used to update a value in the database
 	 */
 	@RequestMapping(method=RequestMethod.PUT, value="/products/{product_id}")
-	public void updateProduct(@RequestBody Map<String, Object> payLoad, @PathVariable("product_id") Long product_id) {
-		productService.updateProduct(product_id, payLoad);
+	public ResponseEntity<?> updateProduct(@RequestBody Map<String, Object> payLoad, @PathVariable("product_id") Long product_id) {
+		return productService.updateProduct(product_id, payLoad);
 	}
 	
 	/*
