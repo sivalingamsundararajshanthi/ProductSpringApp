@@ -8,7 +8,7 @@ public class ProductDiscountPercentageComparator implements Comparator<Product> 
 	
 	@Override
 	public int compare(Product p1, Product p2) {
-		return getDiscountedPercentage(p1) - getDiscountedPercentage(p2);
+		return getDiscountedPercentage(p2) - getDiscountedPercentage(p1);
 	}
 	
 	private int getDiscountedPercentage(Product p) {
