@@ -65,18 +65,18 @@ public class ProductService {
 	 * (i)If a product exists with the same id then it will return a HTTPResponse code of 400
 	 * (ii)If not it will return a HTTPResponse of 201
 	 */
-	public ResponseEntity addProduct(Product product) {
+	public ResponseEntity<?> addProduct(Product product) {
 		
 		//Check to see if the passed in product exists in the Database
 		if(productRepository.existsById(product.getId())) {
 			//Product exists return a HTTP response code of 400
-			return new ResponseEntity(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} else {
 			//Product does not exist, save the product onto the database.
 			productRepository.save(product);
 			
 			//Return HTTPResponse code of 201
-			return new ResponseEntity(HttpStatus.CREATED);
+			return new ResponseEntity<>(HttpStatus.CREATED);
 		}
 	}
 	
@@ -102,7 +102,7 @@ public class ProductService {
 						&& (pr.getDiscountedPrice() == payLoad.get("discounted_price"))
 						&& (pr.getAvailability() == payLoad.get("availability"))) {
 					//If all the three values in the JSON match the fields of the object don't update 
-					return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+					return new ResponseEntity<>("No Such Product", HttpStatus.BAD_REQUEST);
 				} else {
 					//None of the values match update the value
 					pr.setAvailability((Boolean)payLoad.get("availability"));
@@ -110,15 +110,15 @@ public class ProductService {
 					pr.setRetailPrice((Double)payLoad.get("retail_price"));
 					productRepository.save(pr);
 					//Return OK HttStatus Response
-					return new ResponseEntity<>(HttpStatus.OK);
+					return new ResponseEntity<>("Success", HttpStatus.OK);
 				}
 			} else {
 				//Optional is empty send BAD_REQUEST HttpRequest Response
-				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>("No Such Product", HttpStatus.BAD_REQUEST);
 			}
 		} else {
 			//Optional is empty send BAD_REQUEST HttpRequest Response
-			return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("No Such Product", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -129,13 +129,14 @@ public class ProductService {
 	 *    HttpResponse code.
 	 * (ii)Else return ResponseEntity with 404 HttpResponse code.
 	 */
-	public ResponseEntity<Product> getProductById(Long id){
+	public ResponseEntity<?> getProductById(Long id){
 		if(productRepository.existsById(id)) {
 			//Product is found
 			return new ResponseEntity<>(productRepository.findById(id).get(), HttpStatus.OK);
 		} else {
 			//Product is not found
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+			String errorMessage= "No such product found";
+			return new ResponseEntity<>(errorMessage, HttpStatus.NOT_FOUND);
 		}
 	}
 	
