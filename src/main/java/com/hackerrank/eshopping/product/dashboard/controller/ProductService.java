@@ -119,6 +119,20 @@ public class ProductService {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
+	
+	/*
+	 * This method is used to get all the products based on the category that was passed in.
+	 * (i)First items are categorized based on the availability.
+	 * (ii)Second if objects have same availability, then they are sorted in the ascending order of discounted price.
+	 * (iii)Third if objects have same discounted price they are sorted in the ascending order of id
+	 */
+	public ResponseEntity<List<Product>> getProductByAvailability(String category){
+		List<Product> products = productRepository.findByCategory(category);
+		products.sort(Comparator.comparing(Product::getAvailability).reversed().thenComparing(Product::getDiscountedPrice)
+				.thenComparing(Product::getId));
+		return new ResponseEntity<>(products, HttpStatus.OK);
+		
+	}
 }
 
 

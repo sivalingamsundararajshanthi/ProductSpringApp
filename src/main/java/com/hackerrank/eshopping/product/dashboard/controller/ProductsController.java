@@ -49,6 +49,14 @@ public class ProductsController {
 	public ResponseEntity<Product> getProductById(@PathVariable Long product_id){
 		return productService.getProductById(product_id);
 	}
+	
+	/*
+	 * This method is used to get the products that match a particular category
+	 */
+	@RequestMapping("?category={category}")
+	public ResponseEntity<List<Product>> getProductByCategory(@PathVariable String category){
+		return productService.getProductByAvailability(category);
+	}
 }
 
 
