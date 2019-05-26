@@ -1,5 +1,7 @@
 package com.hackerrank.eshopping.product.dashboard.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 import java.util.Map;
 
@@ -72,7 +74,14 @@ public class ProductsController {
 	@ResponseBody
 	public ResponseEntity<List<Product>> findProductsByCategoryAndAvailability(@RequestParam("category") String category,
 			@RequestParam("availability") Integer availability){
-		return productService.getProductByCategoryAndAvailability(availability, category);
+		String urlString;
+		try {
+			urlString = URLDecoder.decode(category, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return productService.getProductByCategoryAndAvailability(availability, urlString);
 	}
 }
 
