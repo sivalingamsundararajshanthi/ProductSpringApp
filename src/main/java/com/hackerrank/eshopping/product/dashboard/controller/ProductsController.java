@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.hackerrank.eshopping.product.dashboard.model.Product;
 
 @RestController
-
 public class ProductsController {
 
 	@Autowired
@@ -52,7 +51,7 @@ public class ProductsController {
 	 */
 	@RequestMapping(method=RequestMethod.GET, value="/products/{product_id}")
 	@ResponseBody
-	public ResponseEntity<?> findProductById(@PathVariable Long product_id){
+	public ResponseEntity<?> findProductById(@PathVariable("product_id") Long product_id){
 		return productService.getProductById(product_id);
 	}
 	
