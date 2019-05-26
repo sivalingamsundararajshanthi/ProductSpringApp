@@ -173,7 +173,16 @@ public class ProductService {
 	public ResponseEntity<List<Product>> getProductByCategoryAndAvailability(Integer availability, String category){
 		boolean con = (availability == 0) ? false : true;
 		
-		return new ResponseEntity<>(productRepository.findByCategoryAndAvailability(category, con), HttpStatus.OK);
+		List<Product> products = productRepository.findByCategoryAndAvailability(category, con);
+		
+		for(Product p : products) {
+			p.setDiscountedPercentage((int) ((p.getRetailPrice() - p.getDiscountedPrice())/p.getRetailPrice()) * 100);
+		}
+		
+		products.sort(Comparator.comparing(Product::getDiscountedPercentage).reversed().thenComparing(Product::getDiscountedPrice)
+				.thenComparing(Product::getId));
+		
+		return new ResponseEntity<>(products, HttpStatus.OK);
 	}
 }
 
