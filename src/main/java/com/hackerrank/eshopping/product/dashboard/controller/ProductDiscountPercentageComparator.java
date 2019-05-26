@@ -13,12 +13,12 @@ public class ProductDiscountPercentageComparator implements Comparator<Product> 
 		if(discountPercentage != 0) {
 			return discountPercentage;
 		} else {
-			int discountPriceComparison = Double.compare(p2.getDiscountedPrice(), p1.getDiscountedPrice());
+			int discountPriceComparison = Double.compare(p1.getDiscountedPrice(), p2.getDiscountedPrice());
 			
 			if(discountPriceComparison != 0) {
 				return discountPriceComparison;
 			} else {
-				return Math.toIntExact(p2.getId()) - Math.toIntExact(p1.getId());
+				return Math.toIntExact(p1.getId()) - Math.toIntExact(p2.getId());
 			}
 		}
 		
