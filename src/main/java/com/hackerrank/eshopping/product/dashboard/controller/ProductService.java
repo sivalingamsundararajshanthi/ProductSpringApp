@@ -28,7 +28,7 @@ public class ProductService {
 	 * a generic type of list of products.
 	 * 
 	 * The returned list is in ascending order of id
-	 */
+	 
 	public ResponseEntity<List<Product>> getAllProducts(){
 		
 		List<Product> products = new ArrayList<>();
@@ -41,6 +41,20 @@ public class ProductService {
 		
 		//return the response entity along with the Http response code
 		return new ResponseEntity<>(products, HttpStatus.OK);
+	}*/
+	
+	public List<Product> getAllProducts(){
+		
+		List<Product> products = new ArrayList<>();
+		
+		//Add all products from iterable
+		productRepository.findAll().forEach(products::add);
+		
+		//Sort the products using id
+		products.sort(Comparator.comparing(Product::getId));
+		
+		//return the response entity along with the Http response code
+		return products;
 	}
 	
 	/*

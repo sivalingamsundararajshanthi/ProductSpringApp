@@ -24,7 +24,8 @@ public class ProductsController {
 	/*
 	 * This service method is used to get all the products in the database and return it with the response code
 	 */
-	public ResponseEntity<List<Product>> findAllProducts(){
+	@RequestMapping(method=RequestMethod.GET)
+	public List<Product> findAllProducts(){
 		return productService.getAllProducts();
 	}
 	
