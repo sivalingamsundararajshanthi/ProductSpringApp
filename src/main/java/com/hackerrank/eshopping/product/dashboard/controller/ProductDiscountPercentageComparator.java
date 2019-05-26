@@ -28,7 +28,8 @@ public class ProductDiscountPercentageComparator implements Comparator<Product> 
 	private int getDiscountedPercentage(Product p) {
 		Double num = p.getRetailPrice() - p.getDiscountedPrice();
 		Double den = p.getRetailPrice();
-		return (int)((num/den) * 100);
+		Double div = num/den;
+		return (int) Math.round(div);
 	}
 
 }
