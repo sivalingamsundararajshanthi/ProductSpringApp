@@ -131,7 +131,18 @@ public class ProductService {
 		products.sort(Comparator.comparing(Product::getAvailability).reversed().thenComparing(Product::getDiscountedPrice)
 				.thenComparing(Product::getId));
 		return new ResponseEntity<>(products, HttpStatus.OK);
+	}
+	
+	/*
+	 * This method is used to get all the products based on the category and availability that were passed in.
+	 * (i)After this the list is sorted by the discount percentage in the descending order
+	 * (ii)The products with the same discount percentage are sorted by discounted price in the ascending order
+	 * (iii)The products with the same discounted price are sorted by ID in the ascending order
+	 */
+	public ResponseEntity<List<Product>> getProductByCategoryAndAvailability(Integer availability, String category){
+		boolean con = (availability == 0) ? false : true;
 		
+		return new ResponseEntity<>(productRepository.findByCategoryAndAvailability(category, con), HttpStatus.OK);
 	}
 }
 
