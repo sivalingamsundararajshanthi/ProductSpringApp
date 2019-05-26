@@ -10,7 +10,7 @@ import javax.persistence.Id;
  * Making the Product class as an Entity such that the Product object can be mapped to Database.
  */
 @Entity
-public class Product implements Serializables {
+public class Product implements Serializable {
 	
 	@Id
     private Long id;
