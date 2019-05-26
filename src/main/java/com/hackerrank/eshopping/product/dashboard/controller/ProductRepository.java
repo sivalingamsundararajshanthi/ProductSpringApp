@@ -1,5 +1,7 @@
 package com.hackerrank.eshopping.product.dashboard.controller;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 
 import com.hackerrank.eshopping.product.dashboard.model.Product;
@@ -11,4 +13,5 @@ import com.hackerrank.eshopping.product.dashboard.model.Product;
  */
 public interface ProductRepository extends CrudRepository<Product, Long> {
 	
+	public List<Product> findByCategory(String category);
 }
