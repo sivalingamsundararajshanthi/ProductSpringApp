@@ -27,7 +27,7 @@ public class Product implements Serializable {
     
     private Boolean availability;
     
-    private Integer discountedPercentage;
+//    private Integer discountedPercentage;
 
     public Product() {
     }
@@ -93,11 +93,11 @@ public class Product implements Serializable {
         this.availability = availability;
     }
 
-	public Integer getDiscountedPercentage() {
-		return discountedPercentage;
-	}
-
-	public void setDiscountedPercentage(Integer discountedPercentage) {
-		this.discountedPercentage = discountedPercentage;
-	}
+//	public Integer getDiscountedPercentage() {
+//		return discountedPercentage;
+//	}
+//
+//	public void setDiscountedPercentage(Integer discountedPercentage) {
+//		this.discountedPercentage = discountedPercentage;
+//	}
 }
