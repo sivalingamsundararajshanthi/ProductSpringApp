@@ -139,6 +139,10 @@ public class ProductService {
 	public ResponseEntity<?> getProductById(Long id){
 		if(productRepository.existsById(id)) {
 			//Product is found
+			Product product = productRepository.findById(id).get();
+			Double dis = product.getDiscountedPrice();
+			Double ret = product.getRetailPrice();
+			
 			return new ResponseEntity<>(productRepository.findById(id).get(), HttpStatus.OK);
 		} else {
 			//Product is not found
