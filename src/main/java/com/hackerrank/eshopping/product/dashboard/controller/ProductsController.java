@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,7 +50,7 @@ public class ProductsController {
 	/*
 	 * This method is used to return a Product if it exists along with a ResponseEntity
 	 */
-	@RequestMapping(method=RequestMethod.GET, value="/products/{product_id}")
+	@RequestMapping(method=RequestMethod.GET, value="/products/{product_id}", produces= {MediaType.APPLICATION_JSON_VALUE})
 	@ResponseBody
 	public ResponseEntity<?> findProductById(@PathVariable("product_id") Long product_id){
 		return productService.getProductById(product_id);
