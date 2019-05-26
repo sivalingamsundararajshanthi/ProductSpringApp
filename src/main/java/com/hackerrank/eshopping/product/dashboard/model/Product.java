@@ -92,6 +92,10 @@ public class Product implements Serializable {
     public void setAvailability(Boolean availability) {
         this.availability = availability;
     }
+    
+    public int getDiscountedPercentage() {
+    	return (int)(((this.getRetailPrice()-this.getDiscountedPrice())/this.getRetailPrice()) * 100);
+    }
 
 //	public Integer getDiscountedPercentage() {
 //		return discountedPercentage;

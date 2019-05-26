@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.comparator.Comparators;
 
 import com.hackerrank.eshopping.product.dashboard.model.Product;
 
@@ -173,14 +174,18 @@ public class ProductService {
 	public ResponseEntity<List<Product>> getProductByCategoryAndAvailability(Integer availability, String category){
 		boolean con = (availability == 0) ? false : true;
 		
-//		List<Product> products = productRepository.findByCategoryAndAvailability(category, con);
-//		
+		List<Product> products = productRepository.findByCategoryAndAvailability(category, con);
+		
 //		for(Product p : products) {
 //			p.setDiscountedPercentage((int) ((p.getRetailPrice() - p.getDiscountedPrice())/p.getRetailPrice()) * 100);
 //		}
-//		
+		
 //		products.sort(Comparator.comparing(Product::getDiscountedPercentage).reversed().thenComparing(Product::getDiscountedPrice)
 //				.thenComparing(Product::getId));
+		
+		products.sort(new ProductDiscountPercentageComparator());
+		
+		products.sort(Comparator.comparing(Product::getDiscountedPrice).thenComparing(Product::getId));
 		
 		return new ResponseEntity<>(productRepository.findByCategoryAndAvailability(category, con), HttpStatus.OK);
 	}
