@@ -92,8 +92,6 @@ public class ProductService {
 	public ResponseEntity<?> updateProduct(Long product_id, Map<String, Object> payLoad) {
 		if(productRepository.existsById(product_id)) {
 			
-			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-			/*
 			//The product exists get Optional
 			Optional<Product> p = productRepository.findById(product_id);
 			if(p.isPresent()) {
@@ -117,10 +115,10 @@ public class ProductService {
 			} else {
 				//Optional is empty send BAD_REQUEST HttpRequest Response
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-			}*/
+			}
 		} else {
 			//Optional is empty send BAD_REQUEST HttpRequest Response
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>("", HttpStatus.BAD_REQUEST);
 		}
 	}
 	
