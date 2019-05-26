@@ -91,7 +91,7 @@ public class ProductService {
 	 */
 	public ResponseEntity<?> updateProduct(Long product_id, Map<String, Object> payLoad) {
 		if(productRepository.findById(product_id) != null) {
-			return new ResponseEntity<>("Success", HttpStatus.OK);
+			return new ResponseEntity<>("No Such Product", HttpStatus.BAD_REQUEST);
 		} else {
 			return new ResponseEntity<>("No Such Product", HttpStatus.BAD_REQUEST);
 		}
