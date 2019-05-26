@@ -74,7 +74,7 @@ public class ProductsController {
 	@ResponseBody
 	public ResponseEntity<List<Product>> findProductsByCategoryAndAvailability(@RequestParam("category") String category,
 			@RequestParam("availability") Integer availability){
-		String urlString;
+		String urlString = category;
 		try {
 			urlString = URLDecoder.decode(category, "UTF-8");
 		} catch (UnsupportedEncodingException e) {
