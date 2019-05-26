@@ -16,8 +16,8 @@ public class Product implements Serializable {
     private Long id;
     private String name;
     private String category;
-    private Double retailPrice;
-    private Double discountedPrice;
+    private Double retail_Price;
+    private Double discounted_Price;
     private Boolean availability;
 
     public Product() {
@@ -27,8 +27,8 @@ public class Product implements Serializable {
         this.id = id;
         this.name = name;
         this.category = category;
-        this.retailPrice = retailPrice;
-        this.discountedPrice = discountedPrice;
+        this.retail_Price = retailPrice;
+        this.discounted_Price = discountedPrice;
         this.availability = availability;
     }
 
@@ -57,19 +57,19 @@ public class Product implements Serializable {
     }
 
     public Double getRetailPrice() {
-        return retailPrice;
+        return retail_Price;
     }
 
     public void setRetailPrice(Double retailPrice) {
-        this.retailPrice = retailPrice;
+        this.retail_Price = retailPrice;
     }
 
     public Double getDiscountedPrice() {
-        return discountedPrice;
+        return discounted_Price;
     }
 
     public void setDiscountedPrice(Double discountedPrice) {
-        this.discountedPrice = discountedPrice;
+        this.discounted_Price = discountedPrice;
     }
 
     public Boolean getAvailability() {
