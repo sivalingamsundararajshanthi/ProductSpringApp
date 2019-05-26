@@ -25,6 +25,7 @@ public class ProductsController {
 	 * This service method is used to get all the products in the database and return it with the response code
 	 */
 	@RequestMapping(method=RequestMethod.GET)
+	@ResponseBody
 	public List<Product> findAllProducts(){
 		return productService.getAllProducts();
 	}
@@ -33,6 +34,7 @@ public class ProductsController {
 	 * This service method is used to add a product to the database
 	 */
 	@RequestMapping(method=RequestMethod.POST)
+	@ResponseBody
 	public ResponseEntity<?> addProduct(@RequestBody Product product) {
 		return productService.addProduct(product);
 	}
@@ -41,6 +43,7 @@ public class ProductsController {
 	 * This service method is used to update a value in the database
 	 */
 	@RequestMapping(method=RequestMethod.PUT, value="/{product_id}")
+	@ResponseBody
 	public void updateProduct(@RequestBody Product product, @PathVariable Long product_id) {
 		productService.updateProduct(product);
 	}
@@ -49,6 +52,7 @@ public class ProductsController {
 	 * This method is used to return a Product if it exists along with a ResponseEntity
 	 */
 	@RequestMapping(method=RequestMethod.GET, value="/{product_id}")
+	@ResponseBody
 	public ResponseEntity<Product> findProductById(@PathVariable Long product_id){
 		return productService.getProductById(product_id);
 	}
