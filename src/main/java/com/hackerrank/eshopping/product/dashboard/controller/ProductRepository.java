@@ -13,6 +13,9 @@ import com.hackerrank.eshopping.product.dashboard.model.Product;
  */
 public interface ProductRepository extends CrudRepository<Product, Long> {
 	
+	//This method signature will form the query to get all the products that match the passed in category String
 	public List<Product> findByCategory(String category);
+	
+	//This method signature will form the query to get all the products that have the passed in category and availability
 	public List<Product> findByCategoryAndAvailability(String category, Boolean availability);
 }

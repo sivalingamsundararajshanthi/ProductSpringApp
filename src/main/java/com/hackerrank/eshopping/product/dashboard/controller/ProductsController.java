@@ -18,9 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.hackerrank.eshopping.product.dashboard.model.Product;
 
+/*
+ * This class is the Rest controller which maps the request URL to corresponding methods.
+ */
 @RestController
 public class ProductsController {
 
+	//Autowiring the ProductService object
 	@Autowired
 	private ProductService productService;
 	
@@ -84,28 +88,3 @@ public class ProductsController {
 		return productService.getProductByCategoryAndAvailability(availability, urlString);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

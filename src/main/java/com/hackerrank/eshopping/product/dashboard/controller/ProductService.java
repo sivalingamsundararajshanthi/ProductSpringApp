@@ -176,19 +176,7 @@ public class ProductService {
 		
 		List<Product> products = productRepository.findByCategoryAndAvailability(category, con);
 		
-//		for(Product p : products) {
-//			p.setDiscountedPercentage((int) ((p.getRetailPrice() - p.getDiscountedPrice())/p.getRetailPrice()) * 100);
-//		}
-		
-//		products.sort(Comparator.comparing(Product::getDiscountedPercentage).reversed().thenComparing(Product::getDiscountedPrice)
-//				.thenComparing(Product::getId));
-		
-//		products.sort(new ProductDiscountPercentageComparator().thenComparing(Product::getDiscountedPrice)
-//				.thenComparing(Product::getId));
-		
 		products.sort(new ProductDiscountPercentageComparator());
-		
-//		products.sort(Comparator.comparing().thenComparing());
 		
 		return new ResponseEntity<>(products, HttpStatus.OK);
 	}
