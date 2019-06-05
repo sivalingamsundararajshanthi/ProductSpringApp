@@ -15,6 +15,7 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <start-class>com.hackerrank.eshopping.product.dashboard.Application</start-class>
     </properties>
 
     <parent>
@@ -92,12 +93,53 @@
         <dependency>
         	<groupId>javax.xml.bind</groupId>
         	<artifactId>jaxb-api</artifactId>
-        	<version>2.3.0</version>
-		</dependency>
+        	</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
     </dependencies> 
+    
+    <build>
+	<plugins>
+		<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+			<configuration>
+				<fork>true</fork>
+				<mainClass>com.hackerrank.eshopping.product.dashboard.Application</mainClass>
+			</configuration>
+	<executions>
+		<execution>
+			<goals>
+				<goal>repackage</goal>
+			</goals>
+		</execution>
+	</executions>
+</plugin>
+		<plugin>
+			<artifactId>maven-assembly-plugin</artifactId>
+			<configuration>
+				<archive>
+					<manifest>
+						<mainClass>com.hackerrank.eshopping.product.dashboard.Application</mainClass>
+					</manifest>
+				</archive>
+				<descriptorRefs>
+					<descriptorRef>jar-with-dependencies</descriptorRef>
+				</descriptorRefs>
+			</configuration>
+			<executions>
+				<execution>
+					<id>make-assembly</id> <!-- this is used for inheritance merges -->
+					<phase>package</phase> <!-- bind to the packaging phase -->
+					<goals>
+						<goal>single</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+	</plugins>
+</build>
 </project>
